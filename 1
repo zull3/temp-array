@@ -1,0 +1,74 @@
+//Import scanner
+import java.util.Scanner;	
+
+public class Main
+{
+	public static void main(String[] args)
+	{
+		// Initialization for the scanner
+		Scanner keyboard = new Scanner(System.in);
+
+    // Declare variables that would be needed
+		int noOfDays = 0;
+    
+    // Read the number of days from the user
+		System.out.print("How many days does the month have? ");
+		noOfDays = keyboard.nextInt();
+
+    //Declare arrays to store the temp for each day
+    double[] temps = new double[noOfDays];
+    int[] days = new int[noOfDays];
+    
+    //Promt the user to enter the temperatures for each day
+    for (int i = 0; i < noOfDays; i++){
+    System.out.printf("Enter the temp for day %d: ", i + 1);
+      temps[i] = keyboard.nextDouble();
+      days[i] = i + 1;
+    }  
+
+    // Find the highest and lowest temp and the day they occured
+    int highestDay = 0;
+    int lowestDay = 0;
+    double highestTemp = temps[0];
+    double lowestTemp = temps[0];
+    for (int i = 1; i < noOfDays; i++){
+      if (temps[i] > highestTemp){
+        highestDay = i;
+        highestTemp = temps[i];
+      }
+      if (temps[i] < lowestTemp){
+        lowestDay = i;
+        lowestTemp = temps[i];
+      }
+    }
+    //print out the higest and lowest temps and the day they occured
+    System.out.printf("The lowest temp of %.1fC occured on day %d.%n" , lowestTemp, lowestDay + 1);
+    System.out.printf("The highest temp of %.1fC occured on day %d.%n" , highestTemp, highestDay + 1);
+
+    //Calculate average temp
+    double sumTemps = 0;
+    for (double temp : temps){
+        sumTemps = (sumTemps + temp);
+    }
+    
+    double avgTemp = sumTemps/noOfDays;
+    
+    System.out.println("Average temp is:" + avgTemp);
+    
+    //Count the number of days where the temp exceeded the avg temp
+    
+    int numExceededAvg = 0;
+    for ( double temp : temps){
+      if (temp > avgTemp){
+        numExceededAvg++;
+      }
+    }
+	  
+    //Print the number of days where the temp exceeded the avg temp
+    System.out.printf("%d day(s) had a temp above the avg temp of %.1fC.%n", numExceededAvg, + avgTemp);
+		
+		keyboard.nextLine(); // Clear the input buffer
+
+    
+  }
+}
